@@ -1,16 +1,19 @@
 import './App.css';
 import { Main } from './main/Main';
+import { BrowserRouter, Switch, Route, Routes } from 'react-router-dom';
 
-
-const App = () => {
+function App() {
     return (
         <div className="App">
-            <header className="App-header"></header>
             <div className="App-body">
-				<Main />
-			</div>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="*" element={<Main />} />
+                    </Routes>
+                </BrowserRouter>
+            </div>
         </div>
     );
-};
+}
 
 export default App;

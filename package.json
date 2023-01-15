@@ -1,6 +1,6 @@
 {
   "name": "test-pcr",
-  "homepage": "https://manhtuanst04.github.io/test-pcr/index.html",
+  "homepage": "https://manhtuanst04.github.io/test-pcr",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.42.1",
+    "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
