@@ -1,0 +1,32 @@
+.App {
+  
+}
+
+.App .App-body {
+  padding: 10px;
+  
+}
+
+.App-body .Main {
+  text-align: center;
+}
+
+.App-body .Main-body {
+  width: 800px;
+  height: auto;
+  display: inline-block;
+  padding: 10px;
+  border: 5px solid #1976d2;
+  border-radius: 25px;
+}
+
+.formGroup {
+  /* display: flex; */
+  padding: 8px;
+}
+
+.formGroup .formLabel {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
