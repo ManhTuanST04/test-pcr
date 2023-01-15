@@ -5,9 +5,9 @@ const MainFormSchema = object().shape({
     address: string().required('Bắt buộc nhập'),
     phone: string().required('Bắt buộc nhập'),
     passport: string().required('Bắt buộc nhập'),
-    sex: string().required('Bắt buộc nhập'),
-    dateOfBirth: string().required('Bắt buộc nhập'),
-    nationality: string().required('Bắt buộc nhập'),
+    sex: string().required('Bắt buộc nhập').default('Nam (Male)'),
+    dateOfBirth: string().required('Bắt buộc nhập').default(''),
+    nationality: string().required('Bắt buộc nhập').default('Việt Nam'),
     samplingTime: string().required('Bắt buộc nhập'),
 });
 

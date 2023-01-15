@@ -23,6 +23,7 @@ export const onSubmit = (data) => {
         data.footerTime = footerTime;
         data.signedTime = signedTime;
         data.barcode = barcode;
+        console.log("🚀 ~ file: handler.js:26 ~ onSubmit ~ data", data)
 
         generateDocument(data);
     } catch (error) {
@@ -62,8 +63,28 @@ const loadFile = (url, callback) => {
     PizZipUtils.getBinaryContent(url, callback);
 };
 
+const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+  
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+  
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+  
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+  
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+  }
+
 const generateDocument = (data) => {
-    loadFile('./template.docx', function (error, content) {
+    loadFile(process.env.PUBLIC_URL + '/template.docx', function (error, content) {
         if (error) {
             throw error;
         }
@@ -101,7 +122,7 @@ const generateDocument = (data) => {
             }
             throw error;
         }
-        debugger
+
         var out = doc.getZip().generate({
             type: 'blob',
             mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
