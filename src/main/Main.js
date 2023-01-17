@@ -1,6 +1,6 @@
 import { Button, MenuItem, TextField } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
-import MainFormSchema from '../Schema/MainFormSchema';
+import MainFormSchema from '../schema/MainFormSchema';
 import { onSubmit } from './handler';
 import TextInput from '../common/field/TextInput';
 import { yupResolver } from '@hookform/resolvers/yup';
