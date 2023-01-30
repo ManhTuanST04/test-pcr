@@ -15,6 +15,7 @@ export const Main = () => {
 
     const {
         register,
+        getValues,
         setValue,
         clearErrors,
         handleSubmit,
@@ -75,6 +76,7 @@ export const Main = () => {
                                 errors={errors}
                                 setValue={setValue}
                                 inputFormat="DD/MM/YYYY"
+                                defaultValue={"01/01/1990"}
                             />
                         </div>
                     </div>
@@ -98,6 +100,7 @@ export const Main = () => {
                             <KeyboardDateTimePicker
                                 name="samplingTime"
                                 errors={errors}
+                                getValues={getValues}
                                 setValue={setValue}
                             />
                         </div>

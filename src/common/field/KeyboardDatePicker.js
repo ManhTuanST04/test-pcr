@@ -1,8 +1,6 @@
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { useState } from 'react';
 import { TextField } from '@mui/material';
-import moment from 'moment';
 import { Controller, useFormContext } from 'react-hook-form';
 
 const KeyboardDatePicker = (props) => {
@@ -20,6 +18,7 @@ const KeyboardDatePicker = (props) => {
             <Controller
                 name={name}
                 control={control}
+                defaultValue={defaultValue}
                 render={({ field: { ref, ...rest } }) => (
                     <DatePicker
                         renderInput={(props) => (

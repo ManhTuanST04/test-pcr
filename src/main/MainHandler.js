@@ -18,11 +18,12 @@ export const onSubmit = (data) => {
         let barcode = generateBarcode(samplingTime);
 
         data.patientName = data.patientName?.toUpperCase();
-        data.samplingTime = samplingTime.format('HH:mm DD-MM-YYYY');
+        data.samplingTime = samplingTime.format('HH:mm DD/MM/YYYY');
         data.collectedTime = collectedTime;
         data.footerTime = footerTime;
         data.signedTime = signedTime;
         data.barcode = barcode;
+        data.dateOfBirth = moment(data.dateOfBirth)?.format('DD/MM/YYYY');
         console.log("🚀 ~ file: handler.js:26 ~ onSubmit ~ data", data)
 
         generateDocument(data);
@@ -33,8 +34,8 @@ export const onSubmit = (data) => {
 
 const generateBarcode = (time) => {
     let samplingTime = cloneDeep(time);
-    let dateDDMMYYY = samplingTime.format('DDMMYYYY');
-    let dateYYYYMMDD = samplingTime.format('YYYYMMDD');
+    let dateDDMMYYY = samplingTime.format('DDMMYY');
+    let dateYYYYMMDD = samplingTime.format('YYMMDD');
     let barcode = `${dateDDMMYYY}-${dateYYYYMMDD}${randomIntFromInterval(100000, 999999)}`;
 
     return barcode;
@@ -44,7 +45,7 @@ const generateCollectedTime = (time) => {
     let samplingTime = cloneDeep(time);
     return samplingTime
         .add(Constant.MINUTES_GEN_COLECTED_TIME, 'minutes')
-        .format('HH:mm DD-MM-YYYY');
+        .format('HH:mm DD/MM/YYYY');
 };
 
 const generateFooterTime = (time) => {
@@ -62,6 +63,11 @@ const generateSignedTime = (time) => {
 const loadFile = (url, callback) => {
     PizZipUtils.getBinaryContent(url, callback);
 };
+
+const generateFileName = (patientName) => {
+    const fileName = `TEST - ${patientName}`;
+    return fileName;
+}
 
 const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
     const byteCharacters = atob(b64Data);
@@ -95,10 +101,8 @@ const generateDocument = (data) => {
         });
         doc.setData(data);
         try {
-            // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
             doc.render();
         } catch (error) {
-            // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
             function replaceErrors(key, value) {
                 if (value instanceof Error) {
                     return Object.getOwnPropertyNames(value).reduce(function (error, key) {
@@ -127,6 +131,8 @@ const generateDocument = (data) => {
             type: 'blob',
             mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         }); //Output the document using Data-URI
-        saveAs(out, 'output.docx');
+
+        let fileName = generateFileName(data.patientName);
+        saveAs(out, `${fileName}.docx`);
     });
 };
