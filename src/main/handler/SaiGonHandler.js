@@ -26,6 +26,7 @@ export const onSubmit = (data) => {
 
         data.patientName = data.patientName?.toUpperCase();
         data.dateOfBirth = moment(data.dateOfBirth)?.format('DD/MM/YYYY');
+        data.sId = samplingTime.format('DDMMYY');;
         data.barcode = randomIntFromInterval(100000, 999999);
 
         data.samplingTime = samplingTime.format('HH:mm DD/MM/YYYY');
