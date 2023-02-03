@@ -28,6 +28,7 @@ export const onSubmit = (data) => {
         data.dateOfBirth = moment(data.dateOfBirth)?.format('DD/MM/YYYY');
         data.sId = samplingTime.format('DDMMYY');;
         data.barcode = randomIntFromInterval(100000, 999999);
+        data.passport = data.passport?.toUpperCase();
 
         data.samplingTime = samplingTime.format('HH:mm DD/MM/YYYY');
         data.collectedTime = collectedTime;

@@ -13,7 +13,8 @@ export const onSubmit = (data) => {
         let footerTime = generateFooterTime(samplingTime);
         let signedTime = generateSignedTime(samplingTime);
         let barcode = generateBarcode(samplingTime);
-
+        data.passport = data.passport?.toUpperCase();
+        
         data.patientName = data.patientName?.toUpperCase();
         data.samplingTime = samplingTime.format('HH:mm DD/MM/YYYY');
         data.collectedTime = collectedTime;
