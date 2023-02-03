@@ -1,6 +1,6 @@
 import { object, string } from 'yup';
 
-const MainFormSchema = object().shape({
+const HaNoiFormSchema = object().shape({
     patientName: string().required('Bắt buộc nhập'),
     address: string().required('Bắt buộc nhập'),
     phone: string().required('Bắt buộc nhập'),
@@ -11,4 +11,4 @@ const MainFormSchema = object().shape({
     samplingTime: string().required('Bắt buộc nhập'),
 });
 
-export default MainFormSchema;
+export default HaNoiFormSchema;
