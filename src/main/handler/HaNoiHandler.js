@@ -4,11 +4,19 @@ import { generateDocument } from './MainHandler';
 import { randomIntFromInterval } from '../../common/Utils';
 import Constant from '../../common/Constant';
 
-export const onSubmit = (data) => {
+export const onSubmit = (data, setError) => {
     try {
         console.log(data);
 
         let samplingTime = moment(data.samplingTime);
+        if(!samplingTime._isValid) {
+            setError('samplingTime', {
+                type: "manual",
+                message: 'Ngày lấy mẫu sai định dạng',
+            });
+            return;
+        }
+
         let collectedTime = generateCollectedTime(samplingTime);
         let footerTime = generateFooterTime(samplingTime);
         let signedTime = generateSignedTime(samplingTime);

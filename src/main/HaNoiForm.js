@@ -18,12 +18,16 @@ export const HaNoiForm = () => {
         setValue,
         handleSubmit,
         formState: { errors },
+        setError
     } = methods;
+    console.debug('🔴🔴🔴 ~ file: HaNoiForm.js:21 ~ HaNoiForm ~ errors', errors);
 
     return (
         <>
             <FormProvider {...methods}>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit((data) => {
+                    onSubmit(data, setError);
+                })}>
                     <div className="formGroup">
                         {/* <label className="formLabel">Họ và tên</label> */}
                         <div className="formControl">

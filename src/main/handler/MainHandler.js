@@ -13,7 +13,7 @@ const loadFile = (url, callback) => {
 };
 
 export const generateDocument = (data, templateFile) => {
-    loadFile(`${process.env.PUBLIC_URL}/${templateFile}`, function (error, content) {
+    loadFile(`${process.env.PUBLIC_URL}/template/${templateFile}`, function (error, content) {
         if (error) {
             throw error;
         }
