@@ -13,7 +13,7 @@ html, body, #root, .Section__container___3YYTG {
 
 .App-body .Main {
   text-align: center;
-  /* background-color: #ECEDEF; */
+  background-color: #ECEDEF;
   height: 100%;
   padding: 32px 40px 31px 40px;
 }
@@ -46,4 +46,9 @@ html, body, #root, .Section__container___3YYTG {
 
 .App-title {
   color: #1976d2;
+}
+
+.change-bg {
+  display: flex;
+  position: absolute;
 }

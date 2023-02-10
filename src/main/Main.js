@@ -6,10 +6,11 @@ import { SaiGonForm } from "./SaiGonForm";
 
 export const Main = () => {
     const [locationTesting, setLocationTesting] = useState(Constant.LOCATION_TESTING.HA_NOI);
+    const [backgroundImage, setBackgroundImage] = useState('bg-img1.jpg');
 
     const myStyle={
         backgroundImage: 
-            `url(${process.env.PUBLIC_URL+ "/bg-img4.jpg"})`,
+            `url(${process.env.PUBLIC_URL + `/${backgroundImage}`})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         minHeight: '100vh'
@@ -17,6 +18,18 @@ export const Main = () => {
 
     return (
         <div className="Main" style={myStyle}>
+            <div className="change-bg">
+                <div className="formControl">
+                    <TextField select value={backgroundImage} onChange={(e) => setBackgroundImage(e.target.value)} fullWidth variant="standard">
+                        <MenuItem value='xam'>Màu nền xám</MenuItem>
+                        <MenuItem value='bg-img1.jpg'>Ảnh nền 1</MenuItem>
+                        <MenuItem value='bg-img2.jpg'>Ảnh nền 2</MenuItem>
+                        <MenuItem value='bg-img3.jpg'>Ảnh nền 3</MenuItem>
+                        <MenuItem value='bg-img4.jpg'>Ảnh nền 4</MenuItem>
+                    </TextField>
+                </div>
+            </div>
+
             <div className="Main-body">
                 <h2 className="App-title">PCR TESTING GENERATOR</h2>
 
