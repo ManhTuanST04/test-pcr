@@ -96,7 +96,7 @@ export const SaiGonForm = () => {
                             />
                         </div>
                     </div>
-                    <Button type="submit" variant="contained">
+                    <Button type="submit" variant="contained" className="btn-submit">
                         Lấy Phiếu Test
                     </Button>
                     {/* <Button type="submit" variant="contained">

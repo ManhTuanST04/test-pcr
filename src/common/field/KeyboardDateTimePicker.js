@@ -25,6 +25,7 @@ const KeyboardDateTimePicker = (props) => {
                         renderInput={(props) => (
                             <TextField
                                 {...props}
+                                label={label}
                                 error={isError}
                                 helperText={errorMessage}
                                 fullWidth
