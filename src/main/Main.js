@@ -14,7 +14,6 @@ export const Main = () => {
     }, [])
 
     const initBackgroundImage = () => {
-        debugger;
         let bgImage = getBackgroundImage();
 
         if(bgImage !== null && bgImage !== '') {
