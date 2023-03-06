@@ -5,7 +5,9 @@ const Constant = {
     LOCATION_TESTING: {
         HA_NOI: "HA_NOI",
         SAI_GON: "SAI_GON",
-    }
+    },
+
+    BACKGROUND_IMAGE_DEFAULT: 'images/bg-img1.jpg'
 }
 
 export default Constant;

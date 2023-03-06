@@ -1,15 +1,36 @@
 import { MenuItem, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Constant from '../common/Constant';
+import { getBackgroundImage, setBackgroundImage } from '../common/localStorageUtils';
 import { HaNoiForm } from './HaNoiForm';
 import { SaiGonForm } from './SaiGonForm';
 
 export const Main = () => {
     const [locationTesting, setLocationTesting] = useState(Constant.LOCATION_TESTING.HA_NOI);
-    const [backgroundImage, setBackgroundImage] = useState('images/bg-img1.jpg');
+    const [bgImage, setBgImage] = useState(Constant.BACKGROUND_IMAGE_DEFAULT);
+
+    useEffect(()=> {
+        initBackgroundImage();
+    }, [])
+
+    const initBackgroundImage = () => {
+        debugger;
+        let bgImage = getBackgroundImage();
+
+        if(bgImage !== null && bgImage !== '') {
+            setBgImage(bgImage);
+        } else {
+            setBgImage(Constant.BACKGROUND_IMAGE_DEFAULT);
+        }
+    }
+
+    const onChangeBackgroundImage = (bgImage) => {
+        setBgImage(bgImage);
+        setBackgroundImage(bgImage);
+    }
 
     const myStyle = {
-        backgroundImage: `url(${process.env.PUBLIC_URL + `/${backgroundImage}`})`,
+        backgroundImage: `url(${process.env.PUBLIC_URL + `/${bgImage}`})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         minHeight: '100vh',
@@ -21,8 +42,8 @@ export const Main = () => {
                 <div className="formControl">
                     <TextField
                         select
-                        value={backgroundImage}
-                        onChange={(e) => setBackgroundImage(`${e.target.value}`)}
+                        value={bgImage}
+                        onChange={(e) => onChangeBackgroundImage(e.target.value)}
                         fullWidth
                         variant="standard"
                     >
