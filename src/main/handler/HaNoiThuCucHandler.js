@@ -2,6 +2,7 @@ import moment from 'moment';
 import { cloneDeep } from 'lodash';
 import { generateDocument } from './MainHandler';
 import Constant from '../../common/Constant';
+import { capitalizeString } from '../../common/Utils';
 
 export const onSubmit = (data, setError) => {
     try {
@@ -34,6 +35,7 @@ export const onSubmit = (data, setError) => {
         data.patientName = data.patientName?.toUpperCase();
         data.dateOfBirth = moment(data.dateOfBirth)?.format('DD/MM/YYYY');
         data.testDate = moment().format('DD/MM/YYYY');
+        data.address = capitalizeString(data.address);
 
         console.log("🚀 ~ file: handler.js:26 ~ onSubmit ~ data", data)
 
