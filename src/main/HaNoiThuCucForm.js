@@ -62,7 +62,7 @@ export const HaNoiThuCucForm = () => {
                                 defaultValue={'Nam'}
                                 label={"Giới tính"}
                             >
-                                <MenuItem value={'Nam'}>Nam (Male) 1</MenuItem>
+                                <MenuItem value={'Nam'}>Nam (Male)</MenuItem>
                                 <MenuItem value={'Nữ'}>Nữ (Female)</MenuItem>
                             </TextInput>
                         </div>
