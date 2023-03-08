@@ -4,6 +4,7 @@ const Constant = {
 
     LOCATION_TESTING: {
         HA_NOI: "HA_NOI",
+        HA_NOI_THU_CUC: "HA_NOI_THU_CUC",
         SAI_GON: "SAI_GON",
     },
 

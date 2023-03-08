@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Constant from '../common/Constant';
 import { getBackgroundImage, setBackgroundImage } from '../common/localStorageUtils';
 import { HaNoiForm } from './HaNoiForm';
+import { HaNoiThuCucForm } from './HaNoiThuCucForm';
 import { SaiGonForm } from './SaiGonForm';
 
 export const Main = () => {
@@ -70,6 +71,7 @@ export const Main = () => {
                             label="Đầu Test"
                         >
                             <MenuItem value={Constant.LOCATION_TESTING.HA_NOI}>Đầu Hà Nội</MenuItem>
+                            <MenuItem value={Constant.LOCATION_TESTING.HA_NOI_THU_CUC}>Đầu Hà Nội - Thu Cúc</MenuItem>
                             <MenuItem value={Constant.LOCATION_TESTING.SAI_GON}>
                                 Đầu Sài Gòn
                             </MenuItem>
@@ -78,6 +80,7 @@ export const Main = () => {
                 </div>
 
                 {locationTesting === Constant.LOCATION_TESTING.HA_NOI && <HaNoiForm />}
+                {locationTesting === Constant.LOCATION_TESTING.HA_NOI_THU_CUC && <HaNoiThuCucForm />}
                 {locationTesting === Constant.LOCATION_TESTING.SAI_GON && <SaiGonForm />}
             </div>
         </div>

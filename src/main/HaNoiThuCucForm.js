@@ -1,16 +1,16 @@
 import { Button, MenuItem } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
-import HaNoiFormSchema from '../schema/HaNoiFormSchema';
-import { onSubmit } from './handler/HaNoiHandler';
+import HaNoiThuCucFormSchema from '../schema/HaNoiThuCucFormSchema';
+import { onSubmit } from './handler/HaNoiThuCucHandler';
 import TextInput from '../common/field/TextInput';
 import { yupResolver } from '@hookform/resolvers/yup';
 import KeyboardDateTimePicker from '../common/field/KeyboardDateTimePicker';
 import KeyboardDatePicker from '../common/field/KeyboardDatePicker';
 
-export const HaNoiForm = () => {
+export const HaNoiThuCucForm = () => {
     const methods = useForm({
         mode: 'onChange',
-        resolver: yupResolver(HaNoiFormSchema),
+        resolver: yupResolver(HaNoiThuCucFormSchema),
     });
 
     const {
@@ -59,11 +59,11 @@ export const HaNoiForm = () => {
                                 errors={errors}
                                 setValue={setValue}
                                 select
-                                defaultValue={'Nam (Male)'}
+                                defaultValue={'Nam'}
                                 label={"Giới tính"}
                             >
-                                <MenuItem value={'Nam (Male)'}>Nam (Male)</MenuItem>
-                                <MenuItem value={'Nữ (Female)'}>Nữ (Female)</MenuItem>
+                                <MenuItem value={'Nam'}>Nam (Male) 1</MenuItem>
+                                <MenuItem value={'Nữ'}>Nữ (Female)</MenuItem>
                             </TextInput>
                         </div>
                     </div>
@@ -112,9 +112,6 @@ export const HaNoiForm = () => {
                     <Button type="submit" variant="contained" className="btn-submit">
                         Lấy Phiếu Test
                     </Button>
-                    {/* <Button type="submit" variant="contained">
-                        PDF
-                    </Button> */}
                 </form>
             </FormProvider>
         </>
