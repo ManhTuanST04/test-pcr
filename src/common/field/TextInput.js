@@ -1,31 +1,34 @@
 import { TextField } from '@mui/material';
-import { useEffect } from 'react';
+import React from 'react';
+import { useFormContext, Controller } from 'react-hook-form';
 
-const TextInput = (props) => {
-    let { name, errors, setValue, label, defaultValue, clearErrors} = props;
-
-    const onChange = (e) => {
-        let data = e.target.value;
-        setValue(name, data);
-
-    };
-
-    useEffect (() => {
-        setValue(name, defaultValue);
-        clearErrors(name);
-    }, [])
+function TextInput(props) {
+    const { control } = useFormContext();
+    const { name, label, required, errors, defaultValue, className } = props;
+    let isError = false;
+    let errorMessage = '';
+    if (errors && errors.hasOwnProperty(name)) {
+        isError = true;
+        errorMessage = errors[name].message;
+    }
 
     return (
-        <TextField
+        <Controller
+            render={({ field }) => (
+                <TextField
+                    {...field}
+                    label={label}
+                    defaultValue={defaultValue ? defaultValue : ''}
+                    fullWidth
+                    error={isError}
+                    helperText={errorMessage}
+                    {...props}
+                />
+            )}
             name={name}
-            label={label}
-            error={!!errors[name]}
-            helperText={errors[name] ? errors[name]?.message : ''}
-            onChange={onChange}
-            fullWidth
-            {...props}
+            control={control}
         />
     );
-};
+}
 
 export default TextInput;
