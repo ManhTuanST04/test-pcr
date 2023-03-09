@@ -2,10 +2,11 @@ import moment from 'moment';
 import { cloneDeep } from 'lodash';
 import { generateDocument } from './MainHandler';
 import Constant from '../../common/Constant';
-import { capitalizeString } from '../../common/Utils';
+import { capitalizeString, randomIntFromInterval } from '../../common/Utils';
 
 export const onSubmit = (data, setError) => {
     try {
+        debugger;
         console.log(data);
         let samplingTime = moment(data.samplingTime);
         if(!samplingTime._isValid) {
@@ -34,8 +35,9 @@ export const onSubmit = (data, setError) => {
         data.passport = data.passport?.toUpperCase();
         data.patientName = data.patientName?.toUpperCase();
         data.dateOfBirth = moment(data.dateOfBirth)?.format('DD/MM/YYYY');
-        data.testDate = moment().format('DD/MM/YYYY');
+        data.testDate = samplingTime.format('DD/MM/YYYY');
         data.address = capitalizeString(data.address);
+        data.specimenId = randomIntFromInterval(100000, 999999);
 
         console.log("🚀 ~ file: handler.js:26 ~ onSubmit ~ data", data)
 
