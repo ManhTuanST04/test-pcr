@@ -1,16 +1,22 @@
 import './App.css';
-import { Main } from './main/Main';
-import { BrowserRouter, Switch, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Menu from 'menu/Menu';
+import { TestPCRMainForm } from 'component/pcr/TestPCRMainForm';
+import BillMainForm from 'component/bill/BillMainForm';
+import MainLoyout from 'layout/MainLoyout';
 
 function App() {
     return (
         <div className="App">
             <div className="App-body">
-                <BrowserRouter>
+                <Router>
+                    <Menu />
                     <Routes>
-                        <Route path="*" element={<Main />} />
+                        <Route path="*" element={<MainLoyout component={TestPCRMainForm} />} />
+                        <Route path="/test-pcr" element={<MainLoyout component={TestPCRMainForm} />} />
+                        <Route path="/bill" element={<MainLoyout component={BillMainForm}/>} />
                     </Routes>
-                </BrowserRouter>
+                </Router>
             </div>
         </div>
     );

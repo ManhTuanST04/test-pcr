@@ -1,8 +1,8 @@
 import moment from 'moment';
 import { cloneDeep } from 'lodash';
 import { generateDocument } from './MainHandler';
-import Constant from '../../common/Constant';
-import { capitalizeString } from '../../common/Utils';
+import Constant from '../../../common/Constant';
+import { capitalizeString } from '../../../common/Utils';
 
 export const onSubmit = (data, setError) => {
     try {

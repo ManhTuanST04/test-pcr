@@ -1,7 +1,7 @@
 import moment from 'moment';
-import Constant from '../../common/Constant';
+import Constant from '../../../common/Constant';
 import { cloneDeep } from 'lodash';
-import { randomIntFromInterval } from '../../common/Utils';
+import { randomIntFromInterval } from '../../../common/Utils';
 import { generateDocument } from './MainHandler';
 
 export const onSubmit = (data) => {

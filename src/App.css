@@ -51,4 +51,6 @@ html, body, #root, .Section__container___3YYTG {
 .change-bg {
   display: flex;
   position: absolute;
+  right: 0;
+  margin-right: 20px;
 }

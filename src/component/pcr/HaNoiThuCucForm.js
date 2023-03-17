@@ -1,11 +1,11 @@
 import { Button, MenuItem } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
-import HaNoiThuCucFormSchema from '../schema/HaNoiThuCucFormSchema';
+import HaNoiThuCucFormSchema from 'schema/HaNoiThuCucFormSchema';
 import { onSubmit } from './handler/HaNoiThuCucHandler';
-import TextInput from '../common/field/TextInput';
+import TextInput from 'common/field/TextInput';
 import { yupResolver } from '@hookform/resolvers/yup';
-import KeyboardDateTimePicker from '../common/field/KeyboardDateTimePicker';
-import KeyboardDatePicker from '../common/field/KeyboardDatePicker';
+import KeyboardDateTimePicker from 'common/field/KeyboardDateTimePicker';
+import KeyboardDatePicker from 'common/field/KeyboardDatePicker';
 
 export const HaNoiThuCucForm = () => {
     const methods = useForm({
