@@ -18,6 +18,11 @@ html, body, #root, .Section__container___3YYTG {
   padding: 32px 40px 31px 40px;
 }
 
+.App-body .Main .version {
+  bottom: 0;
+  position: fixed;
+}
+
 .App-body .Main-body {
   width: 600px;
   height: auto;

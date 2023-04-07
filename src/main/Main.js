@@ -7,7 +7,7 @@ import { HaNoiThuCucForm } from './HaNoiThuCucForm';
 import { SaiGonForm } from './SaiGonForm';
 
 export const Main = () => {
-    const [locationTesting, setLocationTesting] = useState(Constant.LOCATION_TESTING.HA_NOI);
+    const [locationTesting, setLocationTesting] = useState(Constant.LOCATION_TESTING.HA_NOI_THU_CUC);
     const [bgImage, setBgImage] = useState(Constant.BACKGROUND_IMAGE_DEFAULT);
 
     useEffect(()=> {
@@ -70,8 +70,8 @@ export const Main = () => {
                             fullWidth
                             label="Đầu Test"
                         >
-                            <MenuItem value={Constant.LOCATION_TESTING.HA_NOI}>Đầu Hà Nội</MenuItem>
                             <MenuItem value={Constant.LOCATION_TESTING.HA_NOI_THU_CUC}>Đầu Hà Nội - Thu Cúc</MenuItem>
+                            <MenuItem value={Constant.LOCATION_TESTING.HA_NOI}>Đầu Hà Nội - Labhouse</MenuItem>
                             <MenuItem value={Constant.LOCATION_TESTING.SAI_GON}>
                                 Đầu Sài Gòn
                             </MenuItem>
@@ -83,6 +83,8 @@ export const Main = () => {
                 {locationTesting === Constant.LOCATION_TESTING.HA_NOI_THU_CUC && <HaNoiThuCucForm />}
                 {locationTesting === Constant.LOCATION_TESTING.SAI_GON && <SaiGonForm />}
             </div>
+
+            <div className="version">Phiên bản: 07042023</div>
         </div>
     );
 };

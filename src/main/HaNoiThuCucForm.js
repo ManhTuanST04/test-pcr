@@ -90,7 +90,7 @@ export const HaNoiThuCucForm = () => {
                                 errors={errors}
                                 setValue={setValue}
                                 defaultValue="Việt Nam"
-                                label={"Giới tính"}
+                                label={"Quốc tịch"}
                             />
                         </div>
                     </div>
