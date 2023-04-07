@@ -6,7 +6,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 const KeyboardDateTimePicker = (props) => {
     const { control } = useFormContext();
-    const { name, label, required, errors, defaultValue, className, setValue, getValues } = props;
+    const { name, label, errors, defaultValue } = props;
     let isError = false;
     let errorMessage = '';
     if (errors && errors.hasOwnProperty(name)) {
@@ -35,6 +35,7 @@ const KeyboardDateTimePicker = (props) => {
                         disableMaskedInput={true}
                         inputFormat={'DD/MM/YYYY HH:mm'}
                         {...rest}
+                        onChange={props.onChange}
                     />
                 )}
             />

@@ -5,7 +5,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 const KeyboardDatePicker = (props) => {
     const { control } = useFormContext();
-    const { name, label, required, errors, defaultValue, className, inputFormat } = props;
+    const { name, label, errors, defaultValue, inputFormat } = props;
     let isError = false;
     let errorMessage = '';
     if (errors && errors.hasOwnProperty(name)) {
@@ -32,6 +32,7 @@ const KeyboardDatePicker = (props) => {
                         )}
                         inputFormat={inputFormat}
                         {...rest}
+                        onChange={props.onChange}
                     />
                 )}
             />

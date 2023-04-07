@@ -1,18 +1,28 @@
 import { MenuItem, TextField } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Constant from '../common/Constant';
 import { getBackgroundImage, setBackgroundImage } from '../common/localStorageUtils';
-import { HaNoiForm } from './HaNoiForm';
+import HaNoiForm from './HaNoiForm';
 import { HaNoiThuCucForm } from './HaNoiThuCucForm';
 import { SaiGonForm } from './SaiGonForm';
 
 export const Main = () => {
     const [locationTesting, setLocationTesting] = useState(Constant.LOCATION_TESTING.HA_NOI);
     const [bgImage, setBgImage] = useState(Constant.BACKGROUND_IMAGE_DEFAULT);
+    const [isEdited, setIsEdited] = useState(false);
 
     useEffect(()=> {
         initBackgroundImage();
     }, [])
+
+    useEffect(()=> {
+        window.onbeforeunload = function(e) {
+            if(!isEdited) {
+                return;
+            }
+            return '';
+        };
+    }, [isEdited])
 
     const initBackgroundImage = () => {
         let bgImage = getBackgroundImage();
@@ -35,6 +45,10 @@ export const Main = () => {
         backgroundRepeat: 'no-repeat',
         minHeight: '100vh',
     };
+
+    const handleInputChange = useCallback((event) => {
+        setIsEdited(true);
+    }, [])
 
     return (
         <div className="Main" style={myStyle}>
@@ -66,7 +80,10 @@ export const Main = () => {
                         <TextField
                             select
                             value={locationTesting}
-                            onChange={(e) => setLocationTesting(e.target.value)}
+                            onChange={(e) => {
+                                setLocationTesting(e.target.value);
+                                setIsEdited(false);
+                            }}
                             fullWidth
                             label="Đầu Test"
                         >
@@ -79,9 +96,9 @@ export const Main = () => {
                     </div>
                 </div>
 
-                {locationTesting === Constant.LOCATION_TESTING.HA_NOI && <HaNoiForm />}
-                {locationTesting === Constant.LOCATION_TESTING.HA_NOI_THU_CUC && <HaNoiThuCucForm />}
-                {locationTesting === Constant.LOCATION_TESTING.SAI_GON && <SaiGonForm />}
+                {locationTesting === Constant.LOCATION_TESTING.HA_NOI && <HaNoiForm onChange={handleInputChange}/>}
+                {locationTesting === Constant.LOCATION_TESTING.HA_NOI_THU_CUC && <HaNoiThuCucForm onChange={handleInputChange}/>}
+                {locationTesting === Constant.LOCATION_TESTING.SAI_GON && <SaiGonForm onChange={handleInputChange}/>}
             </div>
         </div>
     );

@@ -4,7 +4,7 @@ import { useFormContext, Controller } from 'react-hook-form';
 
 function TextInput(props) {
     const { control } = useFormContext();
-    const { name, label, required, errors, defaultValue, className } = props;
+    const { name, label, errors, defaultValue } = props;
     let isError = false;
     let errorMessage = '';
     if (errors && errors.hasOwnProperty(name)) {
@@ -23,6 +23,7 @@ function TextInput(props) {
                     error={isError}
                     helperText={errorMessage}
                     {...props}
+                    onChange={props.onChange}
                 />
             )}
             name={name}
