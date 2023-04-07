@@ -1,23 +1,36 @@
+html, body, #root, .Section__container___3YYTG {
+  height: 100%;
+}
+
 .App {
-  
+  height: 100%;
 }
 
 .App .App-body {
-  padding: 10px;
-  
+  /* padding: 10px; */
+  height: 100%;
 }
 
 .App-body .Main {
   text-align: center;
+  background-color: #ECEDEF;
+  height: 100%;
+  padding: 32px 40px 31px 40px;
+}
+
+.App-body .Main .version {
+  bottom: 0;
+  position: fixed;
 }
 
 .App-body .Main-body {
-  width: 800px;
+  width: 600px;
   height: auto;
   display: inline-block;
-  padding: 10px;
-  border: 5px solid #1976d2;
+  padding: 32px 40px 31px 40px;
+  /* border: 2px; */
   border-radius: 25px;
+  background-color: white;
 }
 
 .formGroup {
@@ -29,4 +42,18 @@
   display: flex;
   justify-content: flex-start;
   margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.Main-body .btn-submit {
+  margin-top: 10px;
+}
+
+.App-title {
+  color: #1976d2;
+}
+
+.change-bg {
+  display: flex;
+  position: absolute;
 }

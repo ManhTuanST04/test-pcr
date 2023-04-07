@@ -1,38 +1,42 @@
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { useState } from 'react';
 import { TextField } from '@mui/material';
-import moment from 'moment';
+import { Controller, useFormContext } from 'react-hook-form';
 
 const KeyboardDatePicker = (props) => {
-    let { name, errors, setValue, label, defaultValue, inputFormat } = props;
-    
-    const [valueInput, setValueInput] = useState();
-
-    const onChange = (newValue) => {
-        setValue(name, newValue);
-        setValueInput(newValue);
-    };
+    const { control } = useFormContext();
+    const { name, label, required, errors, defaultValue, className, inputFormat } = props;
+    let isError = false;
+    let errorMessage = '';
+    if (errors && errors.hasOwnProperty(name)) {
+        isError = true;
+        errorMessage = errors[name].message;
+    }
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-                renderInput={(props) => (
-                    <TextField
-                        {...props}
-                        error={!!errors[name]}
-                        helperText={errors[name] ? errors[name]?.message : ''}
-                        fullWidth
+            <Controller
+                name={name}
+                control={control}
+                defaultValue={defaultValue}
+                render={({ field: { ref, ...rest } }) => (
+                    <DatePicker
+                        renderInput={(props) => (
+                            <TextField
+                                {...props}
+                                label={label}
+                                error={isError}
+                                helperText={errorMessage}
+                                fullWidth
+                            />
+                        )}
+                        inputFormat={inputFormat}
+                        {...rest}
                     />
                 )}
-                value={valueInput}
-                onChange={onChange}
-                disableMaskedInput={true}
-                inputFormat={inputFormat}
             />
         </LocalizationProvider>
     );
 };
 
-export default KeyboardDatePicker;                
-;
+export default KeyboardDatePicker;

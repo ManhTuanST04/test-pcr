@@ -1,121 +1,90 @@
-import { Button, MenuItem, TextField } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import MainFormSchema from '../Schema/MainFormSchema';
-import { onSubmit } from './handler';
-import TextInput from '../common/field/TextInput';
-import { yupResolver } from '@hookform/resolvers/yup';
-import KeyboardDateTimePicker from '../common/field/KeyboardDateTimePicker';
-import KeyboardDatePicker from '../common/field/KeyboardDatePicker';
+import { MenuItem, TextField } from '@mui/material';
+import { useEffect, useState } from 'react';
+import Constant from '../common/Constant';
+import { getBackgroundImage, setBackgroundImage } from '../common/localStorageUtils';
+import { HaNoiForm } from './HaNoiForm';
+import { HaNoiThuCucForm } from './HaNoiThuCucForm';
+import { SaiGonForm } from './SaiGonForm';
 
 export const Main = () => {
-    const {
-        register,
-        setValue,
-        clearErrors,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({
-        mode: 'all',
-        resolver: yupResolver(MainFormSchema),
-    });
+    const [locationTesting, setLocationTesting] = useState(Constant.LOCATION_TESTING.HA_NOI_THU_CUC);
+    const [bgImage, setBgImage] = useState(Constant.BACKGROUND_IMAGE_DEFAULT);
+
+    useEffect(()=> {
+        initBackgroundImage();
+    }, [])
+
+    const initBackgroundImage = () => {
+        let bgImage = getBackgroundImage();
+
+        if(bgImage !== null && bgImage !== '') {
+            setBgImage(bgImage);
+        } else {
+            setBgImage(Constant.BACKGROUND_IMAGE_DEFAULT);
+        }
+    }
+
+    const onChangeBackgroundImage = (bgImage) => {
+        setBgImage(bgImage);
+        setBackgroundImage(bgImage);
+    }
+
+    const myStyle = {
+        backgroundImage: `url(${process.env.PUBLIC_URL + `/${bgImage}`})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '100vh',
+    };
 
     return (
-        <div className="Main">
-            <form onSubmit={handleSubmit(onSubmit)} className="Main-body">
-                PCR Testing Generator
-                <div className="formGroup">
-                    <label className="formLabel">Họ và tên</label>
-                    <TextInput
-                        name="patientName"
-                        errors={errors}
-                        setValue={setValue}
-                        clearErrors={clearErrors}
-                    />
-                </div>
-                <div className="formGroup">
-                    <label className="formLabel">Địa chỉ</label>
-                    <TextInput
-                        name="address"
-                        errors={errors}
-                        setValue={setValue}
-                        clearErrors={clearErrors}
-                    />
-                </div>
-                <div className="formGroup">
-                    <label className="formLabel">Số điện thoại</label>
-                    <TextInput
-                        name="phone"
-                        errors={errors}
-                        setValue={setValue}
-                        clearErrors={clearErrors}
-                    />
-                </div>
-                <div className="formGroup">
-                    <label className="formLabel">Số hộ chiếu</label>
-                    <TextInput
-                        name="passport"
-                        errors={errors}
-                        setValue={setValue}
-                        clearErrors={clearErrors}
-                    />
-                </div>
-                <div className="formGroup">
-                    <label className="formLabel">Giới tính</label>
-                    <TextInput
-                        name="sex"
-                        errors={errors}
-                        setValue={setValue}
-                        clearErrors={clearErrors}
+        <div className="Main" style={myStyle}>
+            <div className="change-bg">
+                <div className="formControl">
+                    <TextField
                         select
-                        defaultValue={'Nam (Male)'}
+                        value={bgImage}
+                        onChange={(e) => onChangeBackgroundImage(e.target.value)}
+                        fullWidth
+                        variant="standard"
                     >
-                        <MenuItem value={'Nam (Male)'}>Nam (Male)</MenuItem>
-                        <MenuItem value={'Nữ (Female)'}>Nữ (Female)</MenuItem>
-                    </TextInput>
+                        <MenuItem value="xam">Màu nền xám</MenuItem>
+                        <MenuItem value="images/bg-img1.jpg">Ảnh nền 1</MenuItem>
+                        <MenuItem value="images/bg-img2.jpg">Ảnh nền 2</MenuItem>
+                        <MenuItem value="images/bg-img3.jpg">Ảnh nền 3</MenuItem>
+                        <MenuItem value="images/bg-img4.jpg">Ảnh nền 4</MenuItem>
+                        {/* <MenuItem value="images/bg-img5.jpg">Ảnh nền 5</MenuItem> */}
+                    </TextField>
                 </div>
+            </div>
+
+            <div className="Main-body">
+                <h2 className="App-title">PCR TESTING GENERATOR</h2>
+
                 <div className="formGroup">
-                    <label className="formLabel">
-                        Ngày tháng năm sinh (Định dạng: ngày/tháng/năm) Ví dụ: 13/04/1997
-                    </label>
-                    {/* <TextInput name="dateOfBirth" errors={errors} setValue={setValue} /> */}
-                    <KeyboardDatePicker
-                        name="dateOfBirth"
-                        errors={errors}
-                        setValue={setValue}
-                        clearErrors={clearErrors}
-                        inputFormat="DD/MM/YYYY"
-                    />
+                    {/* <label className="formLabel">Đầu Test</label> */}
+                    <div className="formControl">
+                        <TextField
+                            select
+                            value={locationTesting}
+                            onChange={(e) => setLocationTesting(e.target.value)}
+                            fullWidth
+                            label="Đầu Test"
+                        >
+                            <MenuItem value={Constant.LOCATION_TESTING.HA_NOI_THU_CUC}>Đầu Hà Nội - Thu Cúc</MenuItem>
+                            <MenuItem value={Constant.LOCATION_TESTING.HA_NOI}>Đầu Hà Nội - Labhouse</MenuItem>
+                            <MenuItem value={Constant.LOCATION_TESTING.SAI_GON}>
+                                Đầu Sài Gòn
+                            </MenuItem>
+                        </TextField>
+                    </div>
                 </div>
-                <div className="formGroup">
-                    <label className="formLabel">Quốc tịch</label>
-                    <TextInput
-                        name="nationality"
-                        errors={errors}
-                        setValue={setValue}
-                        clearErrors={clearErrors}
-                        defaultValue="Việt Nam"
-                    />
-                </div>
-                <div className="formGroup">
-                    <label className="formLabel">
-                        Thời gian lấy mẫu (Định dạng: ngày/tháng/năm giờ:phút) Ví dụ: 15/01/2023
-                        08:00
-                    </label>
-                    {/* <TextInput name="samplingTime" errors={errors} setValue={setValue} /> */}
-                    <KeyboardDateTimePicker
-                        name="samplingTime"
-                        errors={errors}
-                        setValue={setValue}
-                        clearErrors={clearErrors}
-                    />
-                </div>
-                <Button type="submit" variant="contained">
-                    Lấy Phiếu Test
-                </Button>
-                <Button type="submit" variant="contained">
-                    PDF
-                </Button>
-            </form>
+
+                {locationTesting === Constant.LOCATION_TESTING.HA_NOI && <HaNoiForm />}
+                {locationTesting === Constant.LOCATION_TESTING.HA_NOI_THU_CUC && <HaNoiThuCucForm />}
+                {locationTesting === Constant.LOCATION_TESTING.SAI_GON && <SaiGonForm />}
+            </div>
+
+            <div className="version">Phiên bản: 07042023</div>
         </div>
     );
 };
